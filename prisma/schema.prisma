@@ -15,9 +15,29 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  // Optional for WebAuthn support
-  Authenticator Authenticator[]
- 
+  
+  bio           String?
+  banner        String?
+  anniversary   DateTime?
+  living        String?
+  work          String?
+  gender        String?
+  link          String?
+  pseudo        String?
+
+  posts         Post[]
+  comments      Comment[]
+  likes         Like[]
+  followers     Follow[] @relation("follower")
+  following     Follow[] @relation("following")
+  communities   Community[]
+  communityPosts CommunityPost[]
+  communityPostComments CommunityPostComment[]
+  communityPostLikes CommunityPostLike[]
+  members Member[]
+  savedPosts SavedPost[]
+  addFriends AddFriend[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -62,18 +82,172 @@ model VerificationToken {
  
   @@unique([identifier, token])
 }
- 
-// Optional for WebAuthn support
-model Authenticator {
-  id                   String  @id @default(cuid())
-  credentialID         String  @unique
-  userId               String
-  providerAccountId    String
-  credentialPublicKey  String
-  counter              Int
-  credentialDeviceType String
-  credentialBackedUp   Boolean
-  transports           String?
- 
+
+model Post{
+  id String @id @default(cuid())
+  title String?
+  content String?
+  image String?
+
+  authorId String
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  comments Comment[]
+  likes Like[]
+  savedPosts SavedPost[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Comment{
+  id String @id @default(cuid())
+  content String
+
+  postId String
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  authorId String
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Like{
+  id String @id @default(cuid())
+
+  postId String
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  
+  authorId String
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([postId, authorId])
+}
+
+model SavedPost{
+  id String @id @default(cuid())
+
+  postId String
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  
+  authorId String
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([postId, authorId])
+}
+
+model Follow{
+  id String @id @default(cuid())
+
+  followerId String
+  follower User @relation(name: "follower", fields: [followerId], references: [id], onDelete: Cascade)
+
+  followingId String
+  following User @relation(name: "following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([followerId, followingId])
+}
+
+model AddFriend{
+  id String @id @default(cuid())
+
+  userId String
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId])
+}
+
+
+// community system
+model Community{
+  id String @id @default(cuid())
+  name String
+  description String?
+  image String?
+  
+  authorId String
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  posts CommunityPost[]
+  members Member[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Member{
+  id String @id @default(cuid())
+
+  communityId String
+  community Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
+  
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([communityId, userId])
+}
+
+model CommunityPost{
+  id String @id @default(cuid())
+  content String
+
+  communityId String
+  community Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
+
+  authorId String
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  comments CommunityPostComment[]
+  likes CommunityPostLike[]
+  
+  @@unique([communityId])
+}
+
+model CommunityPostComment{
+  id String @id @default(cuid())
+  content String
+
+  communityPostId String
+  communityPost CommunityPost @relation(fields: [communityPostId], references: [id], onDelete: Cascade)
+
+  authorId String
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CommunityPostLike{
+  id String @id @default(cuid())
+
+  communityPostId String
+  communityPost CommunityPost @relation(fields: [communityPostId], references: [id], onDelete: Cascade)
+  
+  authorId String
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([communityPostId, authorId])
 }
