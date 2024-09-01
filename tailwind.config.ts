@@ -67,10 +67,33 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        gradient: {
+          "0%": {
+            "background-position": "0% 50%",
+            "color": "red",
+          },
+          "25%": {
+            "background-position": "25% 50%",
+            "color": "yellow",
+          },
+          "50%": {
+            "background-position": "50% 50%",
+            "color": "green",
+          },
+          "75%": {
+            "background-position": "75% 50%",
+            "color": "blue",
+          },
+          "100%": {
+            "background-position": "100% 50%",
+            "color": "purple",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        gradient: "gradient 10s ease infinite",
       },
     },
   },
