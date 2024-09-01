@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { Headers } from "@/components/headers/Headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +18,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="mytheme">
-      <body className={inter.className}>{children}</body>
+    <html lang="en">
+      <body className={inter.className}>
+        <SessionProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <Headers />
+            {children}
+          </ThemeProvider>
+        </SessionProvider>
+      </body>
     </html>
   );
 }
