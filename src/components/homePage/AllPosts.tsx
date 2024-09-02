@@ -1,6 +1,6 @@
 import { Ellipsis, Heart, MessageCircle, Bookmark, Eye } from "lucide-react"
 
-export const AllPosts = ({posts}: {posts: any}) => {
+export const AllPosts = ({posts, userid}: {posts: any, userid: string}) => {
   return <>
     {posts.map((post: any) => {
         return (
@@ -13,7 +13,7 @@ export const AllPosts = ({posts}: {posts: any}) => {
                             <h3 className="text-gray-500 text-xs">{new Date(post.createdAt).toLocaleDateString()}</h3>
                         </div>
                     </div>
-                    <Ellipsis size={20} className="text-gray-400 cursor-pointer" />
+                   {post.author.id === userid ? <Ellipsis size={20} className="text-gray-400 cursor-pointer" /> : null}
                 </div>
 
                 <p className="text-gray-300 text-md mt-3 px-5">{post.content}</p>
