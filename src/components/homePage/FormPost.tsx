@@ -60,8 +60,8 @@ export const FormPost = ({user}: {user: UserProps}) => {
             <div className="flex gap-2">
               <label
                 htmlFor="image"
-                className="bg-transparent text-white p-2 rounded-full hover:bg-gray-700 duration-75 cursor-pointer">
-                <Image />
+                className="bg-transparent text-white p-2 rounded-full cursor-pointer">
+                <Image className="text-gray-400 hover:bg-gray-700 p-2 rounded-full duration-75" size={40}  />
                 <input type="file" id="image" accept="image/*" className="hidden" onChange={handleImageUpload} />
               </label>
               <UploadButton
