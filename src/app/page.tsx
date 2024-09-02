@@ -24,14 +24,14 @@ export default async function Home() {
 
       <div className="flex-1 rounded-lg">
         <FormPost user={user}/>
-        <AllPosts initialPosts={posts} userid={user?.id}/>
+        <AllPosts initialPosts={posts} user={user}/>
       </div>
 
       <div className="w-[300px] max-lg:hidden flex flex-col gap-5">
         <FriendsRequest />
         <SponsoredSidebarHome />
       </div>
-      
+
     </main>
   );
 }

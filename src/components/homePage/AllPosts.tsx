@@ -1,9 +1,11 @@
 "use client"
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useCallback, useRef } from "react"
 import { Ellipsis, Heart, MessageCircle, Bookmark, Eye } from "lucide-react"
 import { getPosts } from "@/server/Actions" // Assurez-vous que cette importation est correcte
+import { UserProps } from "@/lib/types"
+import { CommentsForm } from "./CommentsForm"
 
-export const AllPosts = ({ initialPosts, userid }: { initialPosts: any, userid: string }) => {
+export const AllPosts = ({ initialPosts, user }: { initialPosts: any, user: UserProps }) => {
   const [posts, setPosts] = useState(initialPosts)
   const [loading, setLoading] = useState(false)
   const [skip, setSkip] = useState(initialPosts.length)
@@ -46,7 +48,7 @@ export const AllPosts = ({ initialPosts, userid }: { initialPosts: any, userid: 
                   <h3 className="text-gray-500 text-xs">{new Date(post.createdAt).toLocaleDateString()}</h3>
                 </div>
               </div>
-              {post.author.id === userid ? <Ellipsis size={20} className="text-gray-400 cursor-pointer" /> : null}
+              {user && post.author.id === user.id ? <Ellipsis size={20} className="text-gray-400 cursor-pointer" /> : null}
             </div>
 
             <p className="text-gray-300 text-md mt-3 px-5">{post.content}</p>
@@ -85,7 +87,7 @@ export const AllPosts = ({ initialPosts, userid }: { initialPosts: any, userid: 
                   <h3 className="text-gray-500 text-xs">{new Date(post.createdAt).toLocaleDateString()}</h3>
                 </div>
               </div>
-              {post.author.id === userid ? <Ellipsis size={20} className="text-gray-400 cursor-pointer" /> : null}
+              {user && post.author.id === user.id ? <Ellipsis size={20} className="text-gray-400 cursor-pointer" /> : null}
             </div>
 
             <p className="text-gray-300 text-md mt-3 px-5">{post.content}</p>
@@ -111,11 +113,16 @@ export const AllPosts = ({ initialPosts, userid }: { initialPosts: any, userid: 
                 <p className="text-gray-300 text-sm">0 Views</p>
               </div>
             </div>
+
+            {user ? (
+              <div className="flex items-center justify-between mt-3">
+                <CommentsForm userImage={user.image}/>
+              </div>
+            ): <div>Need to be login to comments</div>}
           </div>
         )
       }
     })}
     {loading && <p>Loading more posts...</p>}
-    {!hasMore && <p>No more posts to load.</p>} {/* Message indiquant qu'il n'y a plus de posts */}
   </>
 }
