@@ -27,8 +27,9 @@ export default async function Home() {
         <AllPosts initialPosts={posts} userid={user?.id}/>
       </div>
 
-      <div className="w-[300px] max-lg:hidden">
+      <div className="w-[300px] max-lg:hidden flex flex-col gap-5">
         <FriendsRequest />
+        <SponsoredSidebarHome />
       </div>
       
     </main>
