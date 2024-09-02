@@ -9,15 +9,14 @@ export default async function Home() {
   return (
     <main className="flex w-full gap-5">
       
-      <div className="w-[300px]">
-        <ProfileHome user={user} />
+      <div className="w-[280px]">
+        {user && user.id ? <ProfileHome user={user} /> : null}
       </div>
 
-      <div className="flex-1 bg-red-500 p-5">
+      <div className="flex-1 bg-red-500 p-5 rounded-lg">
       
       </div>
-
-      <div className="w-[300px] bg-blue-500">
+      <div className="w-[300px] bg-blue-500 rounded-lg">
         
       </div>
 
