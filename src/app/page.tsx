@@ -19,7 +19,7 @@ export default async function Home() {
       </div>
 
       <div className="flex-1 rounded-lg">
-        <Stories />
+        
       </div>
       <div className="w-[300px] bg-blue-500 rounded-lg">
         
