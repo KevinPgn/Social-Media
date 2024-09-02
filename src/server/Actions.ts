@@ -105,7 +105,13 @@ export const createPost = authenticatedAction
 export const getPosts = async (skip = 0) => {
   const posts = await prisma.post.findMany({
     include: {
-      author: true,
+      author: {
+        select: {
+          id: true,
+          name: true,
+          image: true,
+        }
+      },
       comments: true,
       _count: {
         select: {
@@ -115,7 +121,7 @@ export const getPosts = async (skip = 0) => {
         }
       }
     },
-    take: 1,
+    take: 10,
     skip,
     orderBy: {
       createdAt: "desc"
