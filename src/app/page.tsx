@@ -1,3 +1,4 @@
+import { Stories } from "@/components/homePage/Stories";
 import { MenuSidebarHome } from "@/components/sidebarHome/MenuSidebarHome";
 import { ProfileHome } from "@/components/sidebarHome/ProfileHome";
 import { SponsoredSidebarHome } from "@/components/sidebarHome/SponsoredSidebarHome";
@@ -17,8 +18,8 @@ export default async function Home() {
         <SponsoredSidebarHome />
       </div>
 
-      <div className="flex-1 bg-red-500 p-5 rounded-lg">
-      
+      <div className="flex-1 rounded-lg">
+        <Stories />
       </div>
       <div className="w-[300px] bg-blue-500 rounded-lg">
         
