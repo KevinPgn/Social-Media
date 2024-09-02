@@ -23,7 +23,7 @@ export default async function Home() {
 
       <div className="flex-1 rounded-lg">
         <FormPost user={user}/>
-        <AllPosts posts={posts} userid={user?.id}/>
+        <AllPosts initialPosts={posts} userid={user?.id}/>
       </div>
       <div className="w-[300px] bg-blue-500 rounded-lg">
         

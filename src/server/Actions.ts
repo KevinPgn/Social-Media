@@ -102,7 +102,7 @@ export const createPost = authenticatedAction
     revalidatePath("/")
   })
 
-export const getPosts = async () => {
+export const getPosts = async (skip = 0) => {
   const posts = await prisma.post.findMany({
     include: {
       author: true,
@@ -115,7 +115,8 @@ export const getPosts = async () => {
         }
       }
     },
-    take: 10,
+    take: 1,
+    skip,
     orderBy: {
       createdAt: "desc"
     }
