@@ -15,7 +15,7 @@ export default async function Home() {
   return (
     <main className="flex w-full gap-7">
       
-      <div className="w-[280px] flex flex-col gap-5">
+      <div className="w-[280px] max-md:hidden flex flex-col gap-5">
         {user && user.id ? <ProfileHome user={user} /> : null}
         <MenuSidebarHome />
         <SponsoredSidebarHome />
@@ -25,7 +25,7 @@ export default async function Home() {
         <FormPost user={user}/>
         <AllPosts initialPosts={posts} userid={user?.id}/>
       </div>
-      <div className="w-[300px] bg-blue-500 rounded-lg">
+      <div className="w-[300px] max-lg:hidden bg-blue-500 rounded-lg">
         
       </div>
 
