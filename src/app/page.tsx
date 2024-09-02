@@ -25,7 +25,7 @@ export default async function Home() {
         <FormPost user={user}/>
         <AllPosts initialPosts={posts} userid={user?.id}/>
       </div>
-      <div className="w-[300px] max-lg:hidden bg-blue-500 rounded-lg">
+      <div className="w-[300px] max-lg:hidden">
         
       </div>
 
