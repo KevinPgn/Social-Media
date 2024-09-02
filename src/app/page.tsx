@@ -3,6 +3,7 @@ import { FormPost } from "@/components/homePage/FormPost";
 import { MenuSidebarHome } from "@/components/sidebarHome/MenuSidebarHome";
 import { ProfileHome } from "@/components/sidebarHome/ProfileHome";
 import { SponsoredSidebarHome } from "@/components/sidebarHome/SponsoredSidebarHome";
+import { FriendsRequest } from "@/components/sidebarRightHome/FriendsRequest";
 import { auth } from "@/lib/auth";
 import { UserProps } from "@/lib/types";
 import { getPosts } from "@/server/Actions";
@@ -25,10 +26,11 @@ export default async function Home() {
         <FormPost user={user}/>
         <AllPosts initialPosts={posts} userid={user?.id}/>
       </div>
-      <div className="w-[300px] max-lg:hidden">
-        
-      </div>
 
+      <div className="w-[300px] max-lg:hidden">
+        <FriendsRequest />
+      </div>
+      
     </main>
   );
 }
