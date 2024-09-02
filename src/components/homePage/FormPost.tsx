@@ -15,7 +15,7 @@ export const FormPost = ({user}: {user: UserProps}) => {
     const content = formData.get("content") as string
     // Pass the image URL to createPost
     const image = formData.get("image") as string || null
-
+    if(!content) return new Error("Content is required")
     try{
       const teste = await createPost({content, image})
       console.log(teste)

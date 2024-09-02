@@ -101,3 +101,19 @@ export const createPost = authenticatedAction
 
     revalidatePath("/")
   })
+
+export const getPosts = async () => {
+  const posts = await prisma.post.findMany({
+    include: {
+      author: true,
+      comments: true,
+      _count: {
+        select: {
+          comments: true,
+          likes: true,
+        }
+      }
+    },
+  })
+  return posts
+}

@@ -1,14 +1,16 @@
+import { AllPosts } from "@/components/homePage/AllPosts";
 import { FormPost } from "@/components/homePage/FormPost";
 import { MenuSidebarHome } from "@/components/sidebarHome/MenuSidebarHome";
 import { ProfileHome } from "@/components/sidebarHome/ProfileHome";
 import { SponsoredSidebarHome } from "@/components/sidebarHome/SponsoredSidebarHome";
 import { auth } from "@/lib/auth";
 import { UserProps } from "@/lib/types";
+import { getPosts } from "@/server/Actions";
 
 export default async function Home() {
   const session = await auth()
   const user = session?.user as UserProps
-  
+  const posts = await getPosts()
   return (
     <main className="flex w-full gap-7">
       
@@ -20,6 +22,7 @@ export default async function Home() {
 
       <div className="flex-1 rounded-lg">
         <FormPost user={user}/>
+        <AllPosts posts={posts}/>
       </div>
       <div className="w-[300px] bg-blue-500 rounded-lg">
         
