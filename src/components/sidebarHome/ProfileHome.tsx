@@ -29,6 +29,6 @@ export const ProfileHome = async ({user}: {user: UserProps}) => {
         </div>
         <p className="text-gray-400 text-center text-xs mt-2">{followers.length} followers</p>
     </div>    
-    <Button className="w-fit bg-blue-500 hover:bg-blue-600 flex items-center text-sm justify-center mt-5 mx-auto">My Profile</Button>
+    <Button className="w-fit bg-blue-500 hover:bg-blue-600 flex items-center text-sm justify-center mt-3 mx-auto">My Profile</Button>
   </div>
 }
