@@ -1,4 +1,4 @@
-import { Stories } from "@/components/homePage/Stories";
+import { FormPost } from "@/components/homePage/FormPost";
 import { MenuSidebarHome } from "@/components/sidebarHome/MenuSidebarHome";
 import { ProfileHome } from "@/components/sidebarHome/ProfileHome";
 import { SponsoredSidebarHome } from "@/components/sidebarHome/SponsoredSidebarHome";
@@ -19,7 +19,7 @@ export default async function Home() {
       </div>
 
       <div className="flex-1 rounded-lg">
-        
+        <FormPost user={user}/>
       </div>
       <div className="w-[300px] bg-blue-500 rounded-lg">
         
