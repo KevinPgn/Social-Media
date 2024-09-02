@@ -37,7 +37,7 @@ export const AllPosts = ({ initialPosts, userid }: { initialPosts: any, userid: 
     {posts.map((post: any, index: number) => {
       if (index === posts.length - 1) {
         return (
-          <div ref={lastPostRef} className="w-full bg-[#1a1916] rounded-lg p-3 mt-5" key={post.id}>
+          <div ref={lastPostRef} className="w-full bg-[#1a1916] rounded-lg p-5 mt-5" key={post.id}>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <img src={post.author.image} alt={post.author.name} className="w-10 h-10 rounded-full" />
@@ -51,7 +51,7 @@ export const AllPosts = ({ initialPosts, userid }: { initialPosts: any, userid: 
 
             <p className="text-gray-300 text-md mt-3 px-5">{post.content}</p>
             {post.image && (
-              <img src={post.image} alt={post.content} className="w-full h-[500px] object-cover mt-3 rounded-lg" />
+              <img src={post.image} alt={post.content} className="w-full h-[350px] object-cover mt-3 rounded-lg" />
             )}
 
             <div className="flex items-center justify-around mt-3">
