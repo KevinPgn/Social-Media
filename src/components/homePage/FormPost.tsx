@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea"
 import { UserProps } from "@/lib/types"
-import { Send, Image } from "lucide-react"
+import { Send } from "lucide-react"
 import { createPost } from "@/server/Actions";
 import { UploadButton } from "@/lib/uploadthing";
 import { useForm } from "react-hook-form"
@@ -58,12 +58,6 @@ export const FormPost = ({user}: {user: UserProps}) => {
           )}
           <div className="flex justify-between rounded-b-lg bg-[#1F1E1B] items-center p-1 px-3">
             <div className="flex gap-2">
-              <label
-                htmlFor="image"
-                className="bg-transparent text-white p-2 rounded-full cursor-pointer">
-                <Image className="text-gray-400 hover:bg-gray-700 p-2 rounded-full duration-75" size={40}  />
-                <input type="file" id="image" accept="image/*" className="hidden" onChange={handleImageUpload} />
-              </label>
               <UploadButton
                 endpoint="imageUploader"
                 onClientUploadComplete={(res) => {
@@ -75,6 +69,18 @@ export const FormPost = ({user}: {user: UserProps}) => {
                 onUploadError={(error) => {
                   console.error(error);
                 }}
+              />
+              <label
+                className="bg-transparent text-white p-2 rounded-full cursor-pointer"
+                onClick={() => document.getElementById('file-upload')?.click()}
+              >
+              </label>
+              <input
+                id="file-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                style={{ display: 'none' }}
               />
             </div>
             <button type="submit" className="bg-transparent text-white p-2 rounded-full hover:bg-gray-700 duration-75">
