@@ -111,6 +111,7 @@ export const getPosts = async () => {
         select: {
           comments: true,
           likes: true,
+          savedPosts: true,
         }
       }
     },
