@@ -23,9 +23,9 @@ export const MenuSidebarHome = () => {
         <CalendarCheck2 className="w-5 h-5 text-gray-400" />
         <span>Events</span>
     </Link>
-    <Link href="/" className={`flex hover:text-blue-500 duration-75 items-center gap-3 ${pathname === "/community" ? "text-blue-500" : "text-gray-400"}`}>  
+    <Link href="/" className={`flex hover:text-blue-500 duration-75 items-center gap-3 ${pathname === "/files" ? "text-blue-500" : "text-gray-400"}`}>  
         <Folder className="w-5 h-5 text-gray-400" />
-        <span>Community</span>
+        <span>Files</span>
     </Link>
     <Link href="/" className={`flex hover:text-blue-500 duration-75 items-center gap-3 ${pathname === "/videos" ? "text-blue-500" : "text-gray-400"}`}>
         <Video className="w-5 h-5 text-gray-400" />
@@ -35,9 +35,9 @@ export const MenuSidebarHome = () => {
         <Newspaper className="w-5 h-5 text-gray-400" />
         <span>News</span>
     </Link>
-    <Link href="/" className={`flex hover:text-blue-500 duration-75 items-center gap-3 ${pathname === "/nfc" ? "text-blue-500" : "text-gray-400"}`}>
+    <Link href="/" className={`flex hover:text-blue-500 duration-75 items-center gap-3 ${pathname === "/community" ? "text-blue-500" : "text-gray-400"}`}>
         <Nfc className="w-5 h-5 text-gray-400" />
-        <span>NFC</span>
+        <span>Community</span>
     </Link>
     <Link href="/" className={`flex hover:text-blue-500 duration-75 items-center gap-3 ${pathname === "/lists" ? "text-blue-500" : "text-gray-400"}`}>
         <List className="w-5 h-5 text-gray-400" />
