@@ -2,6 +2,7 @@
 import prisma from "@/lib/prisma"
 import {z} from "zod"
 import { authenticatedAction } from "@/lib/safe-actions"
+import { revalidatePath } from "next/cache"
 /*
 model Post{
   id String @id @default(cuid())
@@ -80,3 +81,23 @@ model Follow{
 }
 */
 
+export const createPost = authenticatedAction
+  .schema(z.object({
+    title: z.string().min(1).optional(),
+    content: z.string().min(1),
+    image: z.string().url().nullable().optional(), // Ensure the image is a valid URL or null
+  }))
+  .action(async ({parsedInput: {content, image, title}, ctx:{userId}}) => {
+    if(!userId) throw new Error("Unauthorized")
+      
+    await prisma.post.create({
+      data: {
+        title,
+        content,
+        image: image || null, // Handle the case where image is null
+        authorId: userId,
+      }
+    })
+
+    revalidatePath("/")
+  })
